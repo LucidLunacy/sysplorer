@@ -86,19 +86,19 @@ npm install
 getBlockHash: { version: '>=2.2.0' },
 ```
 
-7. Start up both MongoDB and Syscoin QT (or syscoind).
-
-8. In a terminal enter the command:
+7. In a terminal enter the command:
 ```
 npm install -g @angular/cli
 ```
 
-9. Navigate to the top-level of the project directory in a terminal and enter the following command:
+8. Navigate to the top-level of the project directory in a terminal and enter the following command:
 ```
 ng build
 ```
 
-10. Once this has completed type the next command to start the server:
+9. Start up both MongoDB and Syscoin QT (or syscoind).
+
+10. In the top-level of the project directory type the next command to start the server:
 ```
 node server.js
 ```
