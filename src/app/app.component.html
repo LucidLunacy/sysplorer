@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/offers">
+    <table>
+      <tbody>
+        <tr>
+          <td class="align-top">
+            <img src="favicon.ico" alt="Logo"/>
+          </td>
+          <td class="align-bottom">
+            ysplorer
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </a>
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarContent">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarContent">
+    <a class="nav-link" routerLink="/offers">Offers</a>
+    <a class="nav-link" routerLink="/governance">Governance</a>
+    <a class="nav-link" routerLink="/aliases">Aliases</a>
+    <a class="nav-link" routerLink="/assets">Assets</a>
+  </div>
+
+  <ng-container *ngIf="showSearch">
+    <form class="form-inline" #data="ngForm" (ngSubmit)="submitInput(data)" novalidate>
+      <input class="form-control" type="search" name="searchStr" placeholder="Search" ngModel #search="ngModel">
+      <button class="btn btn-primary" type="submit">{{searchBtnText}}</button>
+    </form>
+  </ng-container>
+</nav>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,132 @@
+<h2 id="pageTitle" class="center pt-4 pb-3">Masternode Proposals</h2>
+<p class="center">Next superblock is estimated to occur around {{nextSuperblockTime}}.</p>
+<p class="center">Votes close 3 days before the superblock.</p>
+<p class="center">The budget for the next superblock is {{nextSuperblockBudget}} syscoin.</p>
+<p class="center">In order to achieve funding a proposal must have a vote percent of at least
+                  {{govInfo.governanceminquorum}}%. This is calculated by dividing
+                   absolute yes votes (yes votes minus no votes) by the number of
+                    currently active masternodes.
+<p class="center">If multiple proposals achieve funding, funds will be distributed
+                  in descending order based on the number of absolute yes votes.</p>
+
+<div class="text-center">
+  <div class="btn-group">
+    <div type="button" class="btn btn-secondary" routerLink="/governance/proposals/{{defaultResPerPage}}/1">
+      Proposals
+    </div>
+    <div type="button" class="btn btn-secondary" routerLink="/governance/triggers/{{defaultResPerPage}}/1">
+      Triggers
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="totalResults > resPerPage; then pagination">
+</ng-container>
+
+<ng-container *ngIf="showProps; then props">
+</ng-container>
+
+<ng-container *ngIf="showTrigs; then trigs">
+</ng-container>
+
+<ng-container *ngIf="totalResults > resPerPage; then pagination">
+</ng-container>
+
+
+<ng-template #props>
+  <ng-container *ngIf="proposals[0] !== undefined">
+    <div class="container-fluid">
+      <div class="row py-1" *ngFor="let proposal of proposals[0].results">
+        <div class="card mx-auto" style="width: 80vw;">
+          <h5 class="card-header">{{proposal.name}} - {{proposal.hash}}</h5>
+          <div class="card-body">
+            <div class="card-text">Vote Percent: {{proposal.votePercent}}%</div>
+            <div class="card-text">Yes Votes: {{proposal.yesCount}}</div>
+            <div class="card-text">No Votes: {{proposal.noCount}}</div>
+            <div class="card-text">Abstain Votes: {{proposal.abstainCount}}</div>
+            <div class="card-text">Absolute Yes Votes: {{proposal.absoluteYesCount}}</div>
+            <div class="card-text">Achieved Funding: {{proposal.fCachedFunding}}</div>
+            <div class="card-text">Deleted: {{proposal.fCachedDelete}}</div>
+            <div class="card-text">Endorsed: {{proposal.fCachedEndorsed}}</div>
+            <div class="card-text">Creation Time: {{proposal.creationUTC}}</div>
+            <div class="card-text">Expiration Time: {{proposal.expirationUTC}}</div>
+            <div class="card-text">URL:
+              <a href="{{proposal.url}}" class="inline">
+                {{proposal.url}}
+              </a>
+            </div>
+            <div class="card-text">Address:
+              <a href="https://chainz.cryptoid.info/sys/address.dws?{{proposal.address}}.htm" class="inline">
+                {{proposal.address}}
+              </a>
+            </div>
+            <div class="card-text pb-2">Amount: {{proposal.amount}} sys</div>
+            <div class="card-text">Vote Yes: gobject vote-many {{proposal.hash}} funding yes</div>
+            <div class="card-text">Vote No: gobject vote-many {{proposal.hash}} funding no</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #trigs>
+  <ng-container *ngIf="triggers[0] !== undefined">
+    <div class="container-fluid">
+      <div class="row py-1" *ngFor="let trigger of triggers[0].results">
+        <div class="card mx-auto" style="width: 80vw;">
+          <h5 class="card-header">{{trigger.hash}}</h5>
+          <div class="card-body">
+            <div class="card-text">Creation Time: {{trigger.creationTime}}</div>
+            <div class="card-text">Superblock Block Height: {{trigger.blockHeight}}</div>
+            <div class="row py-1" *ngFor="let fundedProp of trigger.fundedProposals; let i = index">
+              <div class="card card-body">
+                <div class="card-text">Funded Proposal {{i + 1}}: {{fundedProp.hash}}</div>
+                <div class="card-text">Name: {{fundedProp.name}}</div>
+                <div class="card-text">Amount: {{fundedProp.amount}} sys</div>
+                <div class="card-text">URL:
+                  <a href="{{fundedProp.url}}" class="inline">
+                    {{fundedProp.url}}
+                  </a>
+                </div>
+                <div class="card-text">Address:
+                  <a href="https://chainz.cryptoid.info/sys/address.dws?{{fundedProp.address}}.htm" class="inline">
+                    {{fundedProp.address}}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #pagination>
+  <nav class="px-2 py-2">
+    <ul class="pagination justify-content-end">
+      <ng-container *ngIf="pageNum > 1">
+        <li class="page-item"><a class="page-link" routerLink="/governance/{{nav}}/{{searchStr}}/{{resPerPage}}/{{pageNum - 1}}">Previous</a></li>
+      </ng-container>
+      <div *ngFor="let page of pageNums">
+        <div *ngIf="page >= pageNum - 5 && page <= pageNum + 5">
+          <div *ngIf="page != pageNum; else activeNav">
+            <li class="page-item">
+              <a class="page-link" routerLink="/governance/{{nav}}/{{searchStr}}/{{resPerPage}}/{{page}}">
+                {{page}}
+              </a>
+            </li>
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="pageNum < pageNums.length">
+        <li class="page-item"><a class="page-link" routerLink="/governance/{{nav}}/{{searchStr}}/{{resPerPage}}/{{pageNum + 1}}">Next</a></li>
+      </ng-container>
+    </ul>
+  </nav>
+</ng-template>
+
+<ng-template #activeNav>
+  <li class="page-item active"><a class="page-link">{{pageNum}}</a></li>
+</ng-template>

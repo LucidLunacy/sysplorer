@@ -1,0 +1,61 @@
+<ng-container *ngIf="totalResults > resPerPage; then pagination">
+</ng-container>
+
+<ng-container *ngIf="assets[0] !== undefined">
+  <div class="container-fluid">
+    <div class="row py-1" *ngFor="let asset of assets[0].results; let i = index">
+      <div class="card mx-auto" style="width: 80vw;">
+        <div class="card-header">
+          <h5>{{asset.symbol}}</h5>
+        </div>
+        <div class="card-body">
+          <div class="card-text">ID: {{asset.id}}</div>
+          <div class="card-text">Public Value: {{asset.publicvalue}}</div>
+          <div class="card-text">TXID:
+            <a href="https://chainz.cryptoid.info/sys/tx.dws?{{asset.txid}}.htm" class="inline">
+              {{asset.txid}}
+            </a>
+          </div>
+          <div class="card-text">Height: {{asset.height}}</div>
+          <div class="card-text">Created: {{asset.time}}</div>
+          <div class="card-text">Owner: {{asset.alias}}</div>
+          <div class="card-text">Total Supply: {{asset.total_supply}}</div>
+          <div class="card-text">Max Supply: {{asset.max_supply}}</div>
+          <div class="card-text">Interest Rate: {{asset.interest_rate}}</div>
+          <div class="card-text">Precision: {{asset.precision}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="totalResults > resPerPage; then pagination">
+</ng-container>
+
+<ng-template #pagination>
+  <nav class="px-2 py-2">
+    <ul class="pagination justify-content-end">
+      <ng-container *ngIf="pageNum > 1">
+        <li class="page-item"><a class="page-link" routerLink="/assets/{{searchStr}}/{{resPerPage}}/{{pageNum - 1}}">Previous</a></li>
+      </ng-container>
+      <div *ngFor="let page of pageNums">
+        <div *ngIf="page >= pageNum - 5 && page <= pageNum + 5">
+          <div *ngIf="page != pageNum; else activeNav">
+            <li class="page-item">
+              <a class="page-link" routerLink="/assets/{{searchStr}}/{{resPerPage}}/{{page}}">
+                {{page}}
+              </a>
+            </li>
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="pageNum < pageNums.length">
+        <li class="page-item"><a class="page-link" routerLink="/assets/{{searchStr}}/{{resPerPage}}/{{pageNum + 1}}">Next</a></li>
+      </ng-container>
+    </ul>
+  </nav>
+</ng-template>
+
+<ng-template #activeNav>
+  <li class="page-item active"><a class="page-link">{{pageNum}}</a></li>
+</ng-template>

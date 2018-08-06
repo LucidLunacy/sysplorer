@@ -1,0 +1,105 @@
+<ng-container *ngIf="totalResults > resPerPage; then pagination">
+</ng-container>
+
+<ng-container *ngIf="aliases[0] !== undefined">
+  <div class="container-fluid">
+    <div class="row py-1" *ngFor="let alias of aliases[0].results; let i = index">
+      <div class="card mx-auto" style="width: 80vw;">
+        <div class="card-header">
+          <h5>{{alias.id}}</h5>
+          <ul class="nav nav-tabs card-header-tabs" id="tabList" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link" id="alias-details-tab" data-toggle="tab" href="#aliasDetails{{i}}" role="tab">Details</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)="findAssetAllocs(i)" id="alias-assets-tab" data-toggle="tab" href="#aliasAssets{{i}}" role="tab">Assets</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" id="hide-tab" data-toggle="tab" href="#hideTab{{i}}" role="tab">Hide</a>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-content" id="alias-tabContent">
+          <div class="tab-pane fade" id="aliasDetails{{i}}" role="tabpanel">
+            <div class="card-body">
+              <div class="card-text">TXID:
+                <a href="https://chainz.cryptoid.info/sys/tx.dws?{{alias.txid}}.htm" class="inline">
+                  {{alias.txid}}
+                </a>
+              </div>
+              <div class="card-text">Last Update: {{alias.time}}</div>
+              <div class="card-text">Expires: {{alias.expires_on}}</div>
+              <div class="card-text">Height: {{alias.height}}</div>
+              <div class="card-text">Address:
+                <a href="https://chainz.cryptoid.info/sys/address.dws?{{alias.address}}.htm" class="inline">
+                  {{alias.address}}
+                </a>
+              </div>
+              <div class="card-text">Last Update Time: {{alias.lastUpdateUTC}}</div>
+              <div class="card-text">Expiration Time: {{alias.expirationUTC}}</div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="aliasAssets{{i}}" role="tabpanel">
+            <ng-container *ngIf="assetAllocs[i].length == 0">
+              <div class="card-body px-3">
+                <div class="card-text">
+                  No assets have been allocated to this alias.
+                </div>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="assetAllocs[i].length > 0">
+              <!-- get assets and show them -->
+              <div class="row px-3" *ngFor="let assetAlloc of assetAllocs[i]">
+                <div class="card-body">
+                  <h5>{{assetAlloc.symbol}}</h5>
+                  <div class="card-text">Balance: {{assetAlloc.balance}}</div>
+                  <div class="card-text">ID: {{assetAlloc._id}}</div>
+                  <div class="card-text">Asset: {{assetAlloc.asset}}</div>
+                  <div class="card-text">Symbol: {{assetAlloc.symbol}}</div>
+                  <div class="card-text">TXID: {{assetAlloc.txid}}</div>
+                  <div class="card-text">Memo: {{assetAlloc.memo}}</div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="tab-pane fade in show active" id="hideTab{{i}}" role="tabpanel">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="totalResults > resPerPage; then pagination">
+</ng-container>
+
+<ng-template #pagination>
+  <nav class="px-2 py-2">
+    <ul class="pagination justify-content-end">
+      <ng-container *ngIf="pageNum > 1">
+        <li class="page-item"><a class="page-link" routerLink="/aliases/{{searchStr}}/{{resPerPage}}/{{pageNum - 1}}">Previous</a></li>
+      </ng-container>
+      <div *ngFor="let page of pageNums">
+        <div *ngIf="page >= pageNum - 5 && page <= pageNum + 5">
+          <div *ngIf="page != pageNum; else activeNav">
+            <li class="page-item">
+              <a class="page-link" routerLink="/aliases/{{searchStr}}/{{resPerPage}}/{{page}}">
+                {{page}}
+              </a>
+            </li>
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="pageNum < pageNums.length">
+        <li class="page-item"><a class="page-link" routerLink="/aliases/{{searchStr}}/{{resPerPage}}/{{pageNum + 1}}">Next</a></li>
+      </ng-container>
+    </ul>
+  </nav>
+</ng-template>
+
+<ng-template #activeNav>
+  <li class="page-item active"><a class="page-link">{{pageNum}}</a></li>
+</ng-template>

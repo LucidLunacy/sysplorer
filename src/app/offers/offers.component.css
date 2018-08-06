@@ -1,0 +1,42 @@
+.image-block {
+  display: inline-block;
+}
+
+.image {
+  display: inline;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.card-header {
+  background-color: rgba(0,0,230,.05);
+}
+
+.btn-group {
+  padding-top: 1vw;
+}
+
+.container-fluid {
+  padding-top: 1vw;
+  padding-bottom: 1vw;
+}
+
+#catBreadcrumb {
+  width: 80vw;
+}
+
+#catBreadcrumbNav {
+  padding-top: 1vw;
+  padding-left: 9.5vw;
+  padding-right: 10vw;
+}
+
+#pagination {
+  padding-top: 1vw;
+  padding-bottom: 1vw;
+  padding-left: 1vw;
+  padding-right: 10vw;
+  margin-right: 10vw;
+}

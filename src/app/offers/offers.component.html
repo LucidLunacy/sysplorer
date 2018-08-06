@@ -1,0 +1,99 @@
+<ng-container class="inline-block" *ngIf="catParents !== null && catParents.length !== 0">
+  <nav id="catBreadcrumbNav">
+    <ol class="breadcrumb" id="catBreadcrumb">
+      <ng-container *ngFor="let catParent of catParents">
+        <li class="breadcrumb-item">
+          <a routerLink="/offers/category/{{catParent}}/{{resPerPage}}/1">
+            {{catParent}}
+          </a>
+        </li>
+      </ng-container>
+      <ng-container *ngIf="selectedCat !== undefined">
+        <li class="breadcrumb-item">{{selectedCat.name}}</li>
+      </ng-container>
+    </ol>
+  </nav>
+</ng-container>
+
+<div class="text-center">
+  <div class="btn-group" *ngFor="let cat of mainMenuCats">
+    <div type="button" class="btn btn-secondary" routerLink="/offers/category/{{cat.name}}/{{resPerPage}}/1">
+      {{cat.name}}
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="subCats !== undefined && subCats.length !== 0">
+  <div class="card card-body mx-auto" style="width: 80vw">
+    <ul class="breadcrumb">
+      <div *ngFor="let cat of subCats">
+        <li type="button" class="btn btn-light px-4" routerLink="/offers/category/{{cat.name}}/{{resPerPage}}/1">
+          {{cat.name}}
+        </li>
+      </div>
+    </ul>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="totalResults > resPerPage; then pagination">
+</ng-container>
+
+<ng-container *ngIf="offers[0] !== undefined">
+  <div class="container-fluid">
+    <div class="row py-1" *ngFor="let offer of offers[0].results; let i = index">
+      <ng-container *ngIf="offer !== null">
+        <div class="card mx-auto" style="width: 80vw;">
+          <div class="card-header">
+            <h5>{{offer.title}}</h5>
+          </div>
+          <div class="card-body">
+            <div class="card-text">Price: {{offer.price}} {{offer.currency}}</div>
+            <div class="card-text">Quantity: {{offer.quantity}}</div>
+            <div class="card-text">Description: {{offer.description.description}}</div>
+            <div class="card-text">Alias:
+              <a routerLink="/aliases/{{offer.alias}}/{{resPerPage}}/1">
+                {{offer.alias}}
+              </a>
+            </div>
+            <div class="card-text">Address: {{offer.address}}</div>
+            <div class="card-text">Expired: {{offer.expired}}</div>
+            <div class="image-block" *ngFor="let image of offer.description.images">
+              <img src="{{image}}" alt="nothing" class="image" width="200" height="150">
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="totalResults > resPerPage; then pagination">
+</ng-container>
+
+<ng-template #pagination>
+  <nav class="px-2 py-2" id="pagination">
+    <ul class="pagination justify-content-end">
+      <ng-container *ngIf="pageNum > 1">
+        <li class="page-item"><a class="page-link" routerLink="/offers/{{nav}}/{{searchStr}}/{{resPerPage}}/{{pageNum - 1}}">Previous</a></li>
+      </ng-container>
+      <div *ngFor="let page of pageNums">
+        <div *ngIf="page >= pageNum - 5 && page <= pageNum + 5">
+          <div *ngIf="page != pageNum; else activeNav">
+            <li class="page-item">
+              <a class="page-link" routerLink="/offers/{{nav}}/{{searchStr}}/{{resPerPage}}/{{page}}">
+                {{page}}
+              </a>
+            </li>
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="pageNum < pageNums.length">
+        <li class="page-item"><a class="page-link" routerLink="/offers/{{nav}}/{{searchStr}}/{{resPerPage}}/{{pageNum + 1}}">Next</a></li>
+      </ng-container>
+    </ul>
+  </nav>
+</ng-template>
+
+<ng-template #activeNav>
+  <li class="page-item active"><a class="page-link">{{pageNum}}</a></li>
+</ng-template>
