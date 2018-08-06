@@ -98,7 +98,7 @@ ng build
 
 9. Start up both MongoDB and Syscoin QT (or syscoind).
 
-10. In the top-level of the project directory type the next command to start the server:
+10. In the top-level of the project directory type the next command in a terminal to start the server:
 ```
 node server.js
 ```
