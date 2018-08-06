@@ -23,14 +23,14 @@ There are a number of improvements that could currently be made:
 ### WARNING
 As noted above, proper item filtering has not been implemented so there may be items shown which are NSFW.
 
-## INSTALLATION INSTRUCTIONS
+## Installation Instructions
 
 Required software:
 * MongoDB - Version 3.4 has been tested and works with this app. The latest release v4.0 has not been tested.
 * Node.js - v9.4.0 has been tested and works with this app.
 * npm - v6.2.0 has been tested and works with this app.
 
-### INSTALLATION STEPS
+### Installation Steps
 
 1. Download the relevant version of the Syscoin QT wallet for your OS. Open it and let it synchronise the blockchain, close it after this has been done.
 
