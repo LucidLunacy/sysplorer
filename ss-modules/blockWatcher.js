@@ -39,7 +39,7 @@ subscriber.on('message', async (topic, message) => {
     case 'offerhistory':
       var interval = setInterval( async(_) => {
         console.log("Retrieving new offer information...");
-        var offer = await syscoin.offerInfo(messageJSON._id);
+        var offer = await syscoin.offerInfo(messageJSON.offer);
         if (offer !== undefined) {
           db.upsertOffer(offer);
           clearInterval(interval);
