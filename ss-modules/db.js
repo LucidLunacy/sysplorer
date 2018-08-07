@@ -41,6 +41,7 @@ exports.upsertAlias = function(alias) {
     if (err) {
       console.log(err);
     } else {
+      console.log("");
       console.log("************ New/updated alias info added to DB ************")
       console.log(alias);
     }
@@ -65,6 +66,7 @@ exports.upsertAsset = function(asset) {
     if (err) {
       console.log(err);
     } else {
+      console.log("");
       console.log("************ New/updated asset info added to DB ************")
       console.log(asset);
     }
@@ -128,6 +130,7 @@ exports.upsertOffer = function(offer) {
       if (err) {
         console.log(err);
       } else {
+        console.log("");
         console.log("************ New/updated offer info added to DB ************")
         console.log(offer);
       }
