@@ -29,7 +29,7 @@ subscriber.on('message', async (topic, message) => {
     case 'assethistory':
       var interval = setInterval( async(_) => {
         console.log("Retrieving new asset information...");
-        var asset = await syscoin.assetInfo(messageJSON._id);
+        var asset = await syscoin.assetInfo(messageJSON._id, false);
         if (asset !== undefined) {
           db.upsertAsset(asset);
           clearInterval(interval);
