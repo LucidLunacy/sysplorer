@@ -2,7 +2,7 @@
 
 This project will be on hiatus starting from August 2018 for a number of months. Anyone is very welcome to fork and improve it. There is a list of potential improvements below.
 
-Sysplorer is a web app designed to utilise the Syscoin blockchain in order to allow users to explore certain Syscoin blockchain data in the app. It focuses mainly on offers, governance, aliases and assets rather than being a block explorer. This software uses the MEAN stack (MongoDB, Express.js, Angular.js and Node.js).
+Sysplorer is a web app designed to utilise the Syscoin blockchain in order to allow users to explore certain Syscoin blockchain data in the app. It focuses mainly on offers, governance, aliases and assets rather than being a block explorer. This software uses the MEAN stack (MongoDB, Express.js, Angular and Node.js).
 
 This is a quick prototype made with the aim of learning how to use the Syscoin API and what can be done with it.
 
