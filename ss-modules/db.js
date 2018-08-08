@@ -44,6 +44,7 @@ exports.upsertAlias = function(alias) {
       console.log("");
       console.log("************ New/updated alias info added to DB ************")
       console.log(alias);
+      console.log("");
     }
   });
 }
@@ -69,6 +70,7 @@ exports.upsertAsset = function(asset) {
       console.log("");
       console.log("************ New/updated asset info added to DB ************")
       console.log(asset);
+      console.log("");
     }
   });
 }
@@ -133,6 +135,7 @@ exports.upsertOffer = function(offer) {
         console.log("");
         console.log("************ New/updated offer info added to DB ************")
         console.log(offer);
+        console.log("");
       }
     });
   } catch (err) {
