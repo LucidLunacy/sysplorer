@@ -24,6 +24,7 @@
     "@syscoin/syscoin-core": "git+https://github.com/doublesharp/syscoin-core.git#dev-3.0",
     "bootstrap": "^4.1.2",
     "core-js": "^2.4.1",
+    "express": "^4.16.3",
     "jquery": "^3.3.1",
     "log4js": "^3.0.4",
     "popper": "^1.0.1",
