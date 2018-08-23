@@ -81,7 +81,7 @@ zmqpubrawtxlock=tcp://127.0.0.1:3030
 npm install
 ```
 
-6. Navigate to the methods.js file in the "node_modules/@syscoin/syscoin-core/dist/src" folder and add the following line about halfway down the file along with the other methods (once the official syscoin-core v3.0 is released as an npm package Sysplorer's package.json can be updated to link to that version instead, then the below line will not need to be added manually):
+6. Navigate to the methods.js file in the "node_modules/@syscoin/syscoin-core/dist/src" folder and add the following line about halfway down the file along with the other methods (once the official syscoin-core npm package is updated to include this and other methods Sysplorer's package.json can be updated to link to that version instead of Justin Silver's dev version, then the below line will not need to be added manually):
 ```
 getBlockHash: { version: '>=2.2.0' },
 ```
