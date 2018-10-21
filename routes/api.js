@@ -167,7 +167,7 @@ router.get('/findaliases/:searchStr/:resPerPage/:pageNum', function(req, res) {
 // the response based on the results per page and page number
 router.get('/listassetallocations/:alias', async function(req, res) {
   var options = {
-    receiver: req.params.alias
+    receiver_alias: req.params.alias
   }
   const assetAllocs = await syscoin.listAssetAllocations(0, 0, options);
 

@@ -15,7 +15,7 @@ var Proposal = require('../models/proposal.js');
 var Trigger = require('../models/trigger.js');
 
 exports.connect = function() {
-  mongoose.connect('mongodb://localhost/test');
+  mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true });
 
   var db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
