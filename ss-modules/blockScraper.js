@@ -22,6 +22,7 @@ exports.scrapeBlocks = function() {
 
   // get all proposals and triggers every two minutes
   setInterval(function() {
+    db.removeGobjects();
     scrapeProposalsAndTriggers();
   }, 120000);
 }

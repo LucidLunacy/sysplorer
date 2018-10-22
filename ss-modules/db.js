@@ -196,6 +196,12 @@ exports.upsertTrigger = function(trig, propHashes) {
   });
 }
 
+// an interim function to remove all gobjects from the db
+exports.removeGobjects = function() {
+  Proposal.collection.drop();
+  Trigger.collection.drop();
+}
+
 // a function to add/update the given categories in the 'categories' collection
 // also formats the category strings to avoid url errors and to make them more
 // readable
