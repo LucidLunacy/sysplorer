@@ -76,8 +76,14 @@ async function scrapeProposalsAndTriggers() {
   // iterate through the governance objects adding the created JSON objects to
   // the proposals array
   for (var gObject in gObjects) {
-    // get the proposal information specified by the user
-    var dsObject = JSON.parse(gObjects[gObject].DataString);
+    try {
+      // get the proposal information specified by the user
+      var dsObject = JSON.parse(gObjects[gObject].DataString);
+    } catch (err) {
+      console.log(err);
+      console.log(gObjects[gObject].DataString);
+      continue;
+    }
     var objectType = dsObject[0][0];
     var objDetails = dsObject[0][1];
 
